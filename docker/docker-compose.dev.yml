@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: ./docker/builds/nginx/Dockerfile
+    networks:
+      - default
+      - traefik
+    volumes:
+      - ..:/code:delegated
+    labels:
+      traefik.enable: 'true'
+      traefik.frontend.rule: 'Host:split.localhost'
+      traefik.frontend.passHostHeader: 'true'
+    restart: always
+  php:
+    build:
+      context: ..
+      dockerfile: ./docker/builds/php/Dockerfile
+      target: stage_dev
+    volumes:
+      - ..:/code:delegated
+    restart: always
+      
+networks:
+  traefik:
+    external: true
