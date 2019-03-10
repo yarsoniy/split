@@ -1,9 +1,27 @@
-<html lang="">
-    <body>
-        <h1>
-            Hello {{ name }} {{ surname }}!
-        </h1>
-        <br>
-        <a href="{{ url }}">{{ url }}</a>
-    </body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello page{% endblock %}
+{% block body %}
+    <h1>
+        Hello {{ name }} {{ surname }}!
+    </h1>
+    <br>
+    <a href="{{
+        path('hello', {
+            'name': name,
+            'surname': surname,
+            'qoqoqo': 'wowowo'}
+        ) }}"
+    >Follow me!</a>
+    <br>
+
+    {% for person in people %}
+        <div>
+            <span>{{ person.name }}</span>
+            <span>{{ person.surname }}</span>
+        </div>
+    {% endfor %}
+    <br>
+
+    <img src="{{ asset('assets/images/monkey.jpg') }}" alt="Monkey!">
+{% endblock %}

@@ -8,6 +8,8 @@ services:
     networks:
       - default
       - traefik
+    environment:
+      TZ: 'Europe/Kiev'
     volumes:
       - ..:/code:delegated
     labels:
@@ -20,6 +22,8 @@ services:
       context: ..
       dockerfile: ./docker/builds/php/Dockerfile
       target: stage_dev
+    environment:
+      TZ: 'Europe/Kiev'
     volumes:
       - ..:/code:delegated
     restart: always

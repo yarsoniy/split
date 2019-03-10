@@ -12,3 +12,6 @@ build:
 
 ps:
 	docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} ps
+
+exec:
+	docker-compose -p ${COMPOSE_PROJECT_NAME} -f ${COMPOSE_FILE} exec php bash
