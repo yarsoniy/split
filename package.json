@@ -5,6 +5,7 @@
         "sass-loader": "^7.0.1",
         "vue": "^2.6.8",
         "vue-loader": "^15.0.11",
+        "vue-router": "^3.0.2",
         "vue-template-compiler": "^2.6.8",
         "webpack-notifier": "^1.6.0"
     },
@@ -15,5 +16,9 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "bootstrap": "^4.3.1",
+        "bootstrap-vue": "^2.0.0-rc.14"
     }
 }

@@ -6,9 +6,18 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
+import Vue from 'vue';
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+import App from '../vue/App';
+import router from '../vue/router'
+
+new Vue({
+    template: '<App/>',
+    components: { App },
+    router,
+}).$mount('#app');
