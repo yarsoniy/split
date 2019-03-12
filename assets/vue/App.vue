@@ -1,10 +1,8 @@
 <template>
-    <b-container>
-        <b-input-group size="lg" prepend="$" append=".00">
-            <b-form-input />
-        </b-input-group>
+    <div>
+        <h1>Welcome</h1>
         <router-view></router-view>
-    </b-container>
+    </div>
 </template>
 
 <script>

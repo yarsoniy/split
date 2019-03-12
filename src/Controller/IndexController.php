@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Split\Controller\SPA;
+namespace Company\Split\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
