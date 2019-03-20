@@ -29,6 +29,6 @@ doctrine:
             Company\Split:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain'
-                prefix: 'Company\Split\Domain'
+                dir: '%kernel.project_dir%/src'
+                prefix: 'Company\Split'
                 alias: Split

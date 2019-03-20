@@ -1,0 +1,11 @@
+GET http://split.localhost/api/login
+Accept: application/json
+Cache-Control: no-cache
+Content-Type: application/json
+
+{"username":"user1","password":"big_secret"}
+
+<> 2019-03-20T030520.200.json
+
+###
+
