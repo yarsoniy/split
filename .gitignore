@@ -17,7 +17,7 @@
 ###< symfony/web-server-bundle ###
 
 .git
-.idea
+.idea/
 .DS_Store
 
 ###> symfony/webpack-encore-bundle ###
