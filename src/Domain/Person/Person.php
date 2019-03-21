@@ -34,14 +34,9 @@ class Person implements AggregateRoot
      * Person constructor.
      * @param PersonId $id
      * @param string $name
-     * @throws ImpossibleNameException
      */
     public function __construct(PersonId $id, string $name)
     {
-        if ($name == 'Chuck Norris') {
-            throw new ImpossibleNameException("There is only one Chuck Norris and that aren't you");
-        }
-
         $this->id = $id;
         $this->name = $name;
     }
