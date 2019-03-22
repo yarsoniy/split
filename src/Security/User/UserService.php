@@ -56,7 +56,7 @@ class UserService
         try {
             $this->em->flush();
         } catch (UniqueConstraintViolationException $e) {
-            throw new UsernameOccupiedException('The username is occupied');
+            throw new UsernameOccupiedException('The username is already occupied');
         }
 
         return $user;
