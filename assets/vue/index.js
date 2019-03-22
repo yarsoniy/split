@@ -9,6 +9,12 @@
 
 import Vue from 'vue';
 
+import Vuetify from 'vuetify'
+import 'vuetify/src/stylus/main.styl'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
+Vue.use(Vuetify);
+
 import App from '../vue/App';
 import router from '../vue/router'
 

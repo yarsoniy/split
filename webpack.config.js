@@ -42,10 +42,13 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    // .enableSassLoader()
 
     // enable Vue
     .enableVueLoader()
+
+    // enable Stylus support
+    .enableStylusLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
