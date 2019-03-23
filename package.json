@@ -19,6 +19,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "axios": "^0.18.0",
         "vuetify": "^1.5.7"
     }
 }
