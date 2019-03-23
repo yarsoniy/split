@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!api|_(profiler|wdt)).*"})
+     * @Route("/{frontEndRouting}", requirements={"frontEndRouting"="^(?!api|_(profiler|wdt)).*"})
      * @return Response
      */
     public function index()

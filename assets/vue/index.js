@@ -15,11 +15,12 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(Vuetify);
 
-import App from '../vue/App';
-import router from '../vue/router'
+import App from './App';
+import router from './router'
 
 new Vue({
+    el: '#app',
     template: '<App/>',
     components: { App },
-    router,
-}).$mount('#app');
+    router
+});
