@@ -27,7 +27,7 @@
                 ></v-text-field>
                 <v-layout justify-space-between>
                     <v-btn depressed class="mx-0" router to="login">Login</v-btn>
-                    <v-btn class="primary mx-0">Register</v-btn>
+                    <v-btn class="primary mx-0" :loading="isLoading" @click="register()">Register</v-btn>
                 </v-layout>
             </v-form>
         </v-card-text>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
         name: "AppRegistrationForm",
         data() {
@@ -43,6 +45,28 @@
                 name: '',
                 password: '',
                 passwordRepeat: '',
+
+                isLoading: false
+            }
+        },
+        methods: {
+            register() {
+                let self = this;
+
+                self.isLoading = true;
+                axios.post('/api/profiles', {
+                    username: self.username,
+                    name: self.name,
+                    password: self.password,
+                }).then(res => {
+                    console.log(res.data);
+                    self.isLoading = false;
+                    this.$store.dispatch('auth/logout');
+                    this.$router.push('login');
+                }).catch(err => {
+                    self.isLoading = false;
+                    console.log(err);
+                })
             }
         }
     }

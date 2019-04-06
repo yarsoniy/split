@@ -25,6 +25,9 @@ security:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api_register:
+            pattern: ^/api/profiles
+            anonymous: true
         api:
             pattern: ^/api
             stateless: true
