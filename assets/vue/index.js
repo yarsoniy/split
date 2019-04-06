@@ -7,7 +7,7 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 
-import Vue from 'vue';
+import Vue from 'vue'
 
 import Vuetify from 'vuetify'
 import 'vuetify/src/stylus/main.styl'
@@ -15,12 +15,14 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(Vuetify);
 
-import App from './App';
+import App from './App'
 import router from './router'
+import store from './store'
 
 new Vue({
     el: '#app',
     template: '<App/>',
     components: { App },
-    router
+    router,
+    store,
 });
