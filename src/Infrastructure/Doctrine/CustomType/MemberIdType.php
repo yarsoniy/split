@@ -2,7 +2,7 @@
 
 namespace Company\Split\Infrastructure\Doctrine\CustomType;
 
-use Company\Split\Domain\Group\MemberId;
+use Company\Split\Domain\Member\MemberId;
 
 /**
  * Class MemberIdType

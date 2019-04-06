@@ -1,18 +1,19 @@
 <?php
 
-namespace Company\Split\Domain\Group;
+namespace Company\Split\Domain\Member;
 
-use Company\Split\Domain\Money\Money;
+use Company\Split\Domain\Core\AggregateRoot;
+use Company\Split\Domain\Group\GroupId;
 use Company\Split\Domain\Person\PersonId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Member
- * @package Company\Split\Domain\Group
+ * @package Company\Split\Domain\Member
  * @ORM\Entity()
  * @ORM\Table(name="domain_members")
  */
-class Member
+class Member implements AggregateRoot
 {
     /**
      * @var MemberId
@@ -22,10 +23,10 @@ class Member
     private $id;
 
     /**
-     * @var Group
-     * @ORM\ManyToOne(targetEntity="Group", inversedBy="members")
+     * @var GroupId
+     * @ORM\Column(type="group_id", nullable=true)
      */
-    private $group;
+    private $groupId;
 
     /**
      * @var PersonId
@@ -40,12 +41,6 @@ class Member
     private $name;
 
     /**
-     * @var Money
-     * @ORM\Embedded(class="Company\Split\Domain\Money\Money")
-     */
-    private $balance;
-
-    /**
      * @var \DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
@@ -55,14 +50,13 @@ class Member
      * Member constructor.
      * @param MemberId $id
      * @param string $name
-     * @param Group $group
+     * @param GroupId $groupId
      */
-    public function __construct(MemberId $id, string $name, Group $group)
+    public function __construct(MemberId $id, GroupId $groupId, string $name)
     {
         $this->id = $id;
+        $this->groupId = $groupId;
         $this->name = $name;
-        $this->group = $group;
-        $this->balance = new Money();
 
         try {
             $this->whenCreated = new \DateTimeImmutable('now');
