@@ -56,17 +56,4 @@ class Person implements AggregateRoot
     {
         return $this->name;
     }
-
-    /**
-     * @param IdGenerator $generator
-     * @param string $groupName
-     * @return Group
-     */
-    public function createGroup(IdGenerator $generator, string $groupName)
-    {
-        $newId = new GroupId($generator->generate());
-        $group = new Group($newId, $groupName);
-        $group->addPersonalizedMember($generator, $this);
-        return $group;
-    }
 }

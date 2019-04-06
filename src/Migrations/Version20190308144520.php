@@ -42,7 +42,6 @@ final class Version20190308144520 extends AbstractMigration
           group_id CHAR(36) NOT NULL,
           person_id CHAR(36) DEFAULT NULL,
           name VARCHAR(255) NOT NULL,
-          balance_value NUMERIC(10, 2) NOT NULL,
           when_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
           PRIMARY KEY(id),
           FOREIGN KEY (group_id) REFERENCES domain_groups (id) ON DELETE CASCADE,
