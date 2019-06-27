@@ -14,10 +14,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        api_docs:
-            pattern: ^/api/docs
-            anonymous: true
-        api_login:
+        login:
             pattern: ^/api/login
             stateless: true
             anonymous: true
@@ -25,9 +22,6 @@ security:
                 check_path: /api/login
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-        api_register:
-            pattern: ^/api/profiles
-            anonymous: true
         api:
             pattern: ^/api
             stateless: true
@@ -51,4 +45,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/api/profiles, methods: [GET, PUT, PATCH, DELETE] allow_if: "is_authenticated() and user.getId() == request.get('id')"}
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
