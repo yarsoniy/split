@@ -21,8 +21,13 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    Company\Split\Controller\:
-        resource: '../src/Controller'
+    Company\Split\Controller\Web\:
+        resource: '../src/Controller/Web'
+        tags: ['controller.service_arguments']
+
+    Company\Split\Controller\Rest\:
+        resource: '../src/Controller/Rest'
+        exclude: '../src/Controller/Rest/DTO'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
