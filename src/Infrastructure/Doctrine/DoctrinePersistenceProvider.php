@@ -25,11 +25,23 @@ class DoctrinePersistenceProvider implements PersistenceProvider
         $this->em = $em;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function flush()
     {
         $this->em->flush();
+    }
+
+    public function beginTransaction()
+    {
+        $this->em->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->em->commit();
+    }
+
+    public function rollback()
+    {
+        $this->em->rollback();
     }
 }

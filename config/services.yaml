@@ -27,7 +27,7 @@ services:
 
     Company\Split\Controller\Rest\:
         resource: '../src/Controller/Rest'
-        exclude: '../src/Controller/Rest/DTO'
+        exclude: '../src/Controller/Rest/Resource'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
