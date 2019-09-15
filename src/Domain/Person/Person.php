@@ -31,6 +31,12 @@ class Person implements AggregateRoot
     private $name;
 
     /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $email;
+
+    /**
      * Person constructor.
      * @param PersonId $id
      * @param string $name
@@ -55,5 +61,20 @@ class Person implements AggregateRoot
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    public function fillInterest(PersonInterest $interest)
+    {
+        $interest->setId($this->id);
+        $interest->setName($this->name);
+        $interest->setEmail($this->email);
     }
 }

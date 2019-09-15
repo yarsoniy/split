@@ -11,4 +11,6 @@ interface AuthProvider
      * @throws UsernameIsNotUnique
      */
     public function register($id, string $username, string $password);
+
+    public function getUsername($id): string;
 }

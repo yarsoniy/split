@@ -11,6 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
+/**
+ * Class TestController
+ * @package Company\Split\Controller\Rest
+ * @SWG\Tag(name="test")
+ */
 class TestController extends AbstractFOSRestController
 {
 
@@ -94,6 +99,16 @@ class TestController extends AbstractFOSRestController
 
     /**
      * @Rest\Put("/tests/{name}")
+     * @SWG\Parameter(
+     *     name="body",
+     *     in="body",
+     *     @Model(type=Test::class)
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Update resource",
+     *     @Model(type=Test::class)
+     * )
      * @ParamConverter("newTest", converter="fos_rest.request_body")
      * @param string $name
      * @param Test $newTest

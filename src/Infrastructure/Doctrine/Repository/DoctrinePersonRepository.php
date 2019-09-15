@@ -13,6 +13,7 @@ use Company\Split\Domain\Person\PersonRepository;
  * @method PersonId getNewId()
  * @method add(Person $aggregate)
  * @method Person|null get(PersonId $id)
+ * @method Person[] getAll()
  */
 class DoctrinePersonRepository extends DoctrineDomainRepository implements PersonRepository
 {

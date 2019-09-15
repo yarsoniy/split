@@ -11,6 +11,7 @@ use Company\Split\Domain\Core\DomainRepository;
  * @method PersonId getNewId()
  * @method add(Person $aggregate)
  * @method Person|null get(PersonId $id)
+ * @method Person[] getAll()
  */
 interface PersonRepository extends DomainRepository
 {

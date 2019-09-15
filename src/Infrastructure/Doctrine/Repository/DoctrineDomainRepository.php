@@ -66,4 +66,12 @@ abstract class DoctrineDomainRepository extends ServiceEntityRepository implemen
     {
         return $this->find($id);
     }
+
+    /**
+     * @return AggregateRoot[]
+     */
+    public function getAll(): array
+    {
+        return $this->findAll();
+    }
 }

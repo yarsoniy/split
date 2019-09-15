@@ -17,6 +17,9 @@ class UserService implements AuthProvider
     /** @var UserPasswordEncoderInterface  */
     private $passwordEncoder;
 
+    /** @var UserRepository */
+    private $repo;
+
     /** @var EntityManagerInterface  */
     private $em;
 
@@ -24,10 +27,15 @@ class UserService implements AuthProvider
      * UserService constructor.
      * @param UserPasswordEncoderInterface $encoder
      * @param EntityManagerInterface $objectManager
+     * @param UserRepository $repository
      */
-    public function __construct(UserPasswordEncoderInterface $encoder, EntityManagerInterface $objectManager)
-    {
+    public function __construct(
+        UserPasswordEncoderInterface $encoder,
+        EntityManagerInterface $objectManager,
+        UserRepository $repository
+    ) {
         $this->passwordEncoder = $encoder;
+        $this->repo = $repository;
         $this->em = $objectManager;
     }
 
@@ -51,5 +59,10 @@ class UserService implements AuthProvider
         } catch (UniqueConstraintViolationException $e) {
             throw new UsernameIsNotUnique();
         }
+    }
+
+    public function getUsername($id): string
+    {
+        return $this->repo->find($id)->getUsername();
     }
 }

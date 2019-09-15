@@ -23,4 +23,9 @@ interface DomainRepository
      * @return AggregateRoot|null
      */
     public function get(Identity $id): ?AggregateRoot;
+
+    /**
+     * @return AggregateRoot[]
+     */
+    public function getAll(): array;
 }
