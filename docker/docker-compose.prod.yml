@@ -5,14 +5,12 @@ services:
     build:
       context: ..
       dockerfile: ./docker/builds/nginx/Dockerfile
-      target: stage_dev
+      target: stage_prod
     networks:
       - default
       - traefik
     environment:
       TZ: 'Europe/Kiev'
-    volumes:
-      - ..:/code:delegated
     labels:
       traefik.enable: 'true'
       traefik.frontend.rule: 'Host:split.localhost'
@@ -22,11 +20,9 @@ services:
     build:
       context: ..
       dockerfile: ./docker/builds/php/Dockerfile
-      target: stage_dev
+      target: stage_prod
     environment:
       TZ: 'Europe/Kiev'
-    volumes:
-      - ..:/code:delegated
     restart: always
       
 networks:

@@ -8,3 +8,7 @@ RUN pecl install xdebug-2.6.1 && docker-php-ext-enable xdebug
 COPY ./docker/builds/php/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 VOLUME /code
 WORKDIR /code
+
+FROM stage_base AS stage_prod
+COPY ./ /code
+WORKDIR /code
