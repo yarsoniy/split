@@ -4,8 +4,8 @@ services:
   nginx:
     build:
       context: ..
-      dockerfile: ./docker/builds/nginx/Dockerfile
-      target: stage_prod
+      dockerfile: ./docker/builds/Dockerfile
+      target: nginx_prod
     networks:
       - default
       - traefik
@@ -19,8 +19,8 @@ services:
   php:
     build:
       context: ..
-      dockerfile: ./docker/builds/php/Dockerfile
-      target: stage_prod
+      dockerfile: ./docker/builds/Dockerfile
+      target: fpm_prod
     environment:
       TZ: 'Europe/Kiev'
     restart: always

@@ -4,8 +4,8 @@ services:
   nginx:
     build:
       context: ..
-      dockerfile: ./docker/builds/nginx/Dockerfile
-      target: stage_dev
+      dockerfile: ./docker/builds/Dockerfile
+      target: nginx_dev
     networks:
       - default
       - traefik
@@ -21,8 +21,8 @@ services:
   php:
     build:
       context: ..
-      dockerfile: ./docker/builds/php/Dockerfile
-      target: stage_dev
+      dockerfile: ./docker/builds/Dockerfile
+      target: fpm_dev
     environment:
       TZ: 'Europe/Kiev'
     volumes:
