@@ -4,8 +4,8 @@ services:
   nginx:
     build:
       context: ..
-      dockerfile: ./docker/builds/Dockerfile
-      target: nginx_prod
+      dockerfile: ./docker/builds/prod/Dockerfile
+      target: nginx
     networks:
       - default
       - traefik
@@ -19,8 +19,8 @@ services:
   php:
     build:
       context: ..
-      dockerfile: ./docker/builds/Dockerfile
-      target: fpm_prod
+      dockerfile: ./docker/builds/prod/Dockerfile
+      target: fpm
     environment:
       TZ: 'Europe/Kiev'
     restart: always
