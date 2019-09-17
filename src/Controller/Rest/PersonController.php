@@ -80,7 +80,7 @@ class PersonController extends AbstractFOSRestController
                 $input->emailAddress
             );
         } catch (UsernameIsNotUnique $e) {
-            $view = $this->view("Username is already exist", Response::HTTP_CONFLICT);
+            $view = $this->view("Username already exists", Response::HTTP_CONFLICT);
             return $this->handleView($view);
         }
 
