@@ -5,7 +5,7 @@ namespace Company\Split\Controller\Rest\Resource;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Type;
 
-class PersonResource
+class ProfileResource
 {
     /**
      * @var string

@@ -2,7 +2,7 @@
 
 namespace Company\Split\Domain\Person;
 
-interface PersonInterest
+interface PersonDataPicker
 {
     public function setId(string $id);
     public function setName(string $name);

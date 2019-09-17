@@ -71,10 +71,10 @@ class Person implements AggregateRoot
         $this->email = $email;
     }
 
-    public function fillInterest(PersonInterest $interest)
+    public function dumpData(PersonDataPicker $picker)
     {
-        $interest->setId($this->id);
-        $interest->setName($this->name);
-        $interest->setEmail($this->email);
+        $picker->setId($this->id);
+        $picker->setName($this->name);
+        $picker->setEmail($this->email);
     }
 }
