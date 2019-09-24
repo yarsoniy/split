@@ -28,6 +28,12 @@ class Group implements AggregateRoot
     private $name;
 
     /**
+     * @var \DateTimeImmutable
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $whenCreated;
+
+    /**
      * Group constructor.
      * @param GroupId $id
      * @param string $name
@@ -36,5 +42,15 @@ class Group implements AggregateRoot
     {
         $this->id = $id;
         $this->name = $name;
+        try {
+            $this->whenCreated = new \DateTimeImmutable('now');
+        } catch (\Exception $e) {}
+    }
+
+    public function dumpData(GroupDataPicker $picker)
+    {
+        $picker->setId($this->id);
+        $picker->setName($this->name);
+        $picker->setWhenCreated($this->whenCreated);
     }
 }
