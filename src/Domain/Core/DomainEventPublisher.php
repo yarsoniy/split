@@ -2,22 +2,29 @@
 
 namespace Company\Split\Domain\Core;
 
-use Company\Split\GlobalRegistry;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 abstract class DomainEventPublisher
 {
-    public static function publish(DomainEvent $event): void
+    /**
+     * Callable returning an instance.
+     * (Callable, because we want to instantiate only when needed)
+     * @var callable
+     */
+    private static $instanceFactory;
+
+    private static function getInstance(): self
     {
-        $instance = self::getInstance();
-        $instance->publishEvent($event);
+        $factory = self::$instanceFactory;
+        return $factory();
     }
 
-    protected static function getInstance(): self
+    public static function initInstanceFactory(callable $factory)
     {
-        //TODO hide somewhere outside of the Domain
-        $container =  GlobalRegistry::get(ContainerInterface::class);
-        return $container->get(DomainEventPublisher::class);
+        self::$instanceFactory = $factory;
+    }
+
+    public static function publish(DomainEvent $event): void
+    {
+        self::getInstance()->publishEvent($event);
     }
 
     abstract protected function publishEvent(DomainEvent $event);

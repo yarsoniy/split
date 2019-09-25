@@ -2,6 +2,7 @@
 
 namespace Company\Split;
 
+use Company\Split\Domain\Core\DomainEventPublisher;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -50,6 +51,13 @@ class Kernel extends BaseKernel
     protected function initializeContainer()
     {
         parent::initializeContainer();
-        GlobalRegistry::set(ContainerInterface::class, $this->getContainer());
+        $this->initStaticServices();
+    }
+
+    protected function initStaticServices()
+    {
+        DomainEventPublisher::initInstanceFactory(function () {
+            return $this->getContainer()->get(DomainEventPublisher::class);
+        });
     }
 }
