@@ -5,7 +5,9 @@ namespace Company\Split\Application\Person;
 use Company\Split\Application\Auth\AuthProvider;
 use Company\Split\Application\Auth\UsernameIsNotUnique;
 use Company\Split\Application\Core\PersistenceProvider;
+use Company\Split\Domain\Person\EmailOccupiedException;
 use Company\Split\Domain\Person\Person;
+use Company\Split\Domain\Person\PersonService;
 use Company\Split\Domain\Person\PersonId;
 use Company\Split\Domain\Person\PersonRepository;
 
@@ -13,7 +15,7 @@ use Company\Split\Domain\Person\PersonRepository;
  * Class PersonService
  * @package Company\Split\Application\Person
  */
-class PersonService
+class PersonAppService
 {
     /** @var PersistenceProvider  */
     private $persistence;
@@ -23,21 +25,20 @@ class PersonService
 
     /** @var PersonRepository  */
     private $repository;
+    
+    /** @var PersonService */
+    private $domainService;
 
-    /**
-     * PersonService constructor.
-     * @param PersistenceProvider $persistence
-     * @param AuthProvider $auth
-     * @param PersonRepository $repository
-     */
     public function __construct(
         PersistenceProvider $persistence,
         AuthProvider $auth,
-        PersonRepository $repository
+        PersonRepository $repository,
+        PersonService $domainService
     ) {
         $this->persistence = $persistence;
         $this->auth = $auth;
         $this->repository = $repository;
+        $this->domainService = $domainService;
     }
 
     /**
@@ -47,31 +48,16 @@ class PersonService
      * @param $email
      * @return Person
      * @throws UsernameIsNotUnique
+     * @throws EmailOccupiedException
      */
     public function register($username, $password, $name, $email)
     {
         $this->persistence->beginTransaction();
 
-        $person = $this->createPerson($name, $email);
+        $person = $this->domainService->createPerson($name, $email);
         $this->auth->register($person->getId(), $username, $password);
 
         $this->persistence->commit();
-
-        return $person;
-    }
-
-    /**
-     * @param string $name
-     * @param string $email
-     * @return Person
-     */
-    private function createPerson(string $name, string $email)
-    {
-        $person = new Person($this->repository->getNewId(), $name);
-        $person->setEmail($email);
-        $this->repository->add($person);
-        $this->persistence->flush();
-
         return $person;
     }
 

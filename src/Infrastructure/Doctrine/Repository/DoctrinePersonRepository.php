@@ -19,4 +19,9 @@ class DoctrinePersonRepository extends DoctrineDomainRepository implements Perso
 {
     protected const ENTITY_CLASS = Person::class;
     protected const ID_CLASS = PersonId::class;
+
+    public function getByEmail(string $email): ?Person
+    {
+        return $this->findOneBy(['email' => $email]);
+    }
 }

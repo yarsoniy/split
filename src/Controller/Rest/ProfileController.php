@@ -4,34 +4,37 @@ namespace Company\Split\Controller\Rest;
 
 use Company\Split\Application\Auth\AuthProvider;
 use Company\Split\Application\Auth\UsernameIsNotUnique;
-use Company\Split\Application\Person\PersonService;
+use Company\Split\Application\Person\PersonAppService;
 use Company\Split\Controller\Rest\Resource\ProfileMaker;
 use Company\Split\Controller\Rest\Resource\ProfileResource;
+use Company\Split\Domain\Person\EmailOccupiedException;
 use Company\Split\Domain\Person\Person;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @package Company\Split\Controller\Rest
  * @SWG\Tag(name="profile")
  */
-class ProfileController extends AbstractFOSRestController
+class ProfileController extends BaseRestController
 {
-    /** @var PersonService  */
+    /** @var PersonAppService  */
     private $personService;
 
     /** @var AuthProvider  */
     private $auth;
 
     public function __construct(
-        PersonService $personService,
+        ValidatorInterface $validator,
+        PersonAppService $personService,
         AuthProvider $auth
     ){
+        parent::__construct($validator);
         $this->personService = $personService;
         $this->auth = $auth;
     }
@@ -71,6 +74,10 @@ class ProfileController extends AbstractFOSRestController
      */
     public function postAction(ProfileResource $input)
     {
+        if ($validationResult = $this->validateInput($input)) {
+            return $validationResult;
+        }
+
         try {
             $person = $this->personService->register(
                 $input->username,
@@ -79,14 +86,15 @@ class ProfileController extends AbstractFOSRestController
                 $input->emailAddress
             );
         } catch (UsernameIsNotUnique $e) {
-            $view = $this->view("Username already exists", Response::HTTP_CONFLICT);
-            return $this->handleView($view);
+            $msg = "Username already exists";
+            return $this->error(Response::HTTP_CONFLICT, "username_is_not_unique", $msg, "username");
+        } catch (EmailOccupiedException $e) {
+            $msg = "User with the same email already exists";
+            return $this->error(Response::HTTP_CONFLICT, "email_is_occupied", $msg, "emailAddress");
         }
 
         $result = $this->prepareResource($person);
-
-        $view = $this->view($result, Response::HTTP_CREATED);
-        return $this->handleView($view);
+        return $this->successCreated($result);
     }
 
     /**
@@ -107,17 +115,17 @@ class ProfileController extends AbstractFOSRestController
      * )
      *
      * @param $id
-     * @return View
+     * @return Response
      */
     public function getAction($id)
     {
         $person = $this->personService->find($id);
         if (!$person) {
-            return $this->view("Resource not found", Response::HTTP_NOT_FOUND);
+            return $this->errorNotFound();
         }
 
         $result = $this->prepareResource($person);
-        return $this->view($result, Response::HTTP_OK);
+        return $this->success($result);
     }
 
     /**
@@ -138,7 +146,7 @@ class ProfileController extends AbstractFOSRestController
      *     )
      * )
      *
-     * @return View
+     * @return Response
      */
     public function getListAction()
     {
@@ -147,7 +155,7 @@ class ProfileController extends AbstractFOSRestController
             $result[] = $this->prepareResource($person);
         }
 
-        return $this->view($result, Response::HTTP_OK);
+        return $this->success($result);
     }
 
     private function prepareResource(Person $person): ProfileResource

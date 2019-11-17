@@ -15,4 +15,5 @@ use Company\Split\Domain\Core\DomainRepository;
  */
 interface PersonRepository extends DomainRepository
 {
+    public function getByEmail(string $email): ?Person;
 }
