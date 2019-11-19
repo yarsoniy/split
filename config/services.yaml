@@ -19,10 +19,7 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    Company\Split\Infrastructure\DomainEventPublisherImpl: ~
-
-    Company\Split\Domain\Core\DomainEventPublisher:
-        alias: Company\Split\Infrastructure\DomainEventPublisherImpl
+    Company\Split\Domain\Core\EventPublisher:
         public: true
 
     # controllers are imported separately to make sure services can be injected
