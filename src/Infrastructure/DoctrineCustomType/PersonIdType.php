@@ -1,13 +1,9 @@
 <?php
 
-namespace Company\Split\Infrastructure\Doctrine\CustomType;
+namespace Company\Split\Infrastructure\DoctrineCustomType;
 
 use Company\Split\Domain\Person\PersonId;
 
-/**
- * Class PersonIdType
- * @package Company\Split\Infrastructure\ORM\CustomMappingTypes
- */
 class PersonIdType extends IdentityType
 {
     protected const CUSTOM_NAME = 'person_id';

@@ -1,25 +1,15 @@
 <?php
 
-namespace Company\Split\Infrastructure\Doctrine;
+namespace Company\Split\Infrastructure\PersistenceProvider;
 
 use Company\Split\Application\Core\PersistenceProvider;
 use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * Class DoctrinePersistenceProvider
- * @package Company\Split\Infrastructure\Doctrine
- */
 class DoctrinePersistenceProvider implements PersistenceProvider
 {
-    /**
-     * @var EntityManagerInterface
-     */
+    /** @var EntityManagerInterface */
     private $em;
 
-    /**
-     * DoctrinePersistenceProvider constructor.
-     * @param EntityManagerInterface $em
-     */
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;

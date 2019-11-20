@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Split\Infrastructure\Doctrine\Repository;
+namespace Company\Split\Infrastructure\Repository;
 
 use Company\Split\Domain\Core\AggregateRoot;
 use Company\Split\Domain\Core\Identity;
@@ -10,12 +10,9 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class DoctrineDomainRepository
- * @package Company\Split\Infrastructure\Doctrine\Repository
- *
  * @method AggregateRoot|null find($id, $lockMode = null, $lockVersion = null)
  */
-abstract class DoctrineDomainRepository extends ServiceEntityRepository implements DomainRepository
+abstract class DoctrineRepository extends ServiceEntityRepository implements DomainRepository
 {
     /** @var string  */
     protected const ENTITY_CLASS = '';
@@ -29,7 +26,7 @@ abstract class DoctrineDomainRepository extends ServiceEntityRepository implemen
     protected $idGenerator;
 
     /**
-     * DoctrineDomainRepository constructor.
+     * DoctrineRepository constructor.
      * @param ManagerRegistry $registry
      * @param IdGenerator $generator
      */

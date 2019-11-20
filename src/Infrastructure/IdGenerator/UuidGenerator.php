@@ -1,14 +1,10 @@
 <?php
 
-namespace Company\Split\Infrastructure;
+namespace Company\Split\Infrastructure\IdGenerator;
 
 use Company\Split\Domain\Core\IdGenerator;
 use Ramsey\Uuid\Uuid;
 
-/**
- * Class UuidGenerator
- * @package Company\Split\Infrastructure
- */
 class UuidGenerator implements IdGenerator
 {
     /**
