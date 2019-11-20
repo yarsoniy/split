@@ -1,6 +1,6 @@
 security:
     encoders:
-        Company\Split\Security\User\User:
+        Company\Split\Infrastructure\Security\User:
             algorithm: argon2i
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
@@ -8,7 +8,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: Company\Split\Security\User\User
+                class: Company\Split\Infrastructure\Security\User
                 property: username
     firewalls:
         dev:

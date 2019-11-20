@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Split\Security\User;
+namespace Company\Split\Infrastructure\Security;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;

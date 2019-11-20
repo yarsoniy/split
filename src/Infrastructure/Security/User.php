@@ -1,12 +1,12 @@
 <?php
 
-namespace Company\Split\Security\User;
+namespace Company\Split\Infrastructure\Security;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="Company\Split\Security\User\UserRepository")
+ * @ORM\Entity(repositoryClass="Company\Split\Infrastructure\Security\UserRepository")
  * @ORM\Table(name="security_users")
  */
 class User implements UserInterface

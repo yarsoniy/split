@@ -1,6 +1,6 @@
 <?php
 
-namespace Company\Split\Security\User;
+namespace Company\Split\Infrastructure\Security;
 
 use Company\Split\Application\Auth\AuthProvider;
 use Company\Split\Application\Auth\UsernameIsNotUnique;
@@ -8,10 +8,6 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
- * Class UserService
- * @package Company\Split\Security\Service
- */
 class UserService implements AuthProvider
 {
     /** @var UserPasswordEncoderInterface  */
@@ -23,12 +19,6 @@ class UserService implements AuthProvider
     /** @var EntityManagerInterface  */
     private $em;
 
-    /**
-     * UserService constructor.
-     * @param UserPasswordEncoderInterface $encoder
-     * @param EntityManagerInterface $objectManager
-     * @param UserRepository $repository
-     */
     public function __construct(
         UserPasswordEncoderInterface $encoder,
         EntityManagerInterface $objectManager,
