@@ -11,6 +11,7 @@ use Company\Split\Infrastructure\Repository\DoctrineRepository;
  * @method GroupId getNewId()
  * @method add(Group $group)
  * @method Group|null get(GroupId $id)
+ * @method Group[] getAll()
  */
 class GroupDoctrineRepository extends DoctrineRepository implements GroupRepository
 {

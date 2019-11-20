@@ -11,6 +11,7 @@ use Company\Split\Infrastructure\Repository\DoctrineRepository;
  * @method MemberId getNewId()
  * @method add(Member $group)
  * @method Member|null get(MemberId $id)
+ * @method Member[] getAll()
  */
 class MemberDoctrineRepository extends DoctrineRepository implements MemberRepository
 {

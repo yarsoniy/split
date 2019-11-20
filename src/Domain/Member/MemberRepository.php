@@ -11,6 +11,7 @@ use Company\Split\Domain\Core\DomainRepository;
  * @method MemberId getNewId()
  * @method add(Member $group)
  * @method Member|null get(MemberId $id)
+ * @method Member[] getAll()
  */
 interface MemberRepository extends DomainRepository
 {
