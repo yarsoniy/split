@@ -9,4 +9,4 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://localhost:8000
-        - \App\Tests\Helper\Acceptance
+        - \Company\Split\Tests\Helper\Acceptance
