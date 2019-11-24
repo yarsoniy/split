@@ -37,18 +37,18 @@ class UserService implements AuthProvider
      */
     public function register($id, string $username, string $password)
     {
+        $repo = $this->em->getRepository(User::class);
+        if ($repo->findBy(['username' => $username])) {
+            throw new UsernameIsNotUnique();
+        }
+
         $user = new User();
         $user->setId($id);
         $user->setUsername($username);
         $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
 
         $this->em->persist($user);
-
-        try {
-            $this->em->flush();
-        } catch (UniqueConstraintViolationException $e) {
-            throw new UsernameIsNotUnique();
-        }
+        $this->em->flush();
     }
 
     public function getUsername($id): string
