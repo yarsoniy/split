@@ -2,6 +2,7 @@
 
 namespace Company\Split\Tests;
 
+use Company\Split\Infrastructure\Security\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginCest
@@ -14,15 +15,8 @@ class LoginCest
 
     public function testSuccess(ApiTester $I)
     {
-        $I->amGoingTo("create the profile first");
-        $I->sendPOST('/profiles', [
-            "username" => "beta",
-            "password" => "1111",
-            "fullName" => "Beta First",
-            "emailAddress" => "beta1@test.com"
-        ]);
-        $I->seeResponseCodeIs(Response::HTTP_CREATED);
-
+        $I->wantToTest("login success");
+        $I->haveProfile(['username' => 'beta', 'password' => '1111']);
         $I->amGoingTo("send login request");
         $I->sendPOST('/login', ["username" => "beta", "password" => "1111"]);
         $I->seeResponseCodeIs(Response::HTTP_OK);
@@ -32,6 +26,8 @@ class LoginCest
 
     public function testFail(ApiTester $I)
     {
+        $I->amGoingTo("check that I dont have a user 'alpha'");
+        $I->dontSeeInRepository(User::class, ['username' => 'alpha']);
         $I->sendPOST('/login', ["username" => "alpha", "password" => "1234"]);
         $I->seeResponseCodeIs(Response::HTTP_UNAUTHORIZED);
         $I->seeResponseIsJson();

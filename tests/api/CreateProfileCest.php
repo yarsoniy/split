@@ -50,19 +50,8 @@ class CreateProfileCest
      */
     public function testNotUniqueUsername(ApiTester $I)
     {
-        $I->wantToTest("we can't create two profiles with the same username");
-
-        $I->amGoingTo("create the first profile");
-        $I->sendPOST('/profiles', [
-            "username" => "beta",
-            "password" => "1111",
-            "fullName" => "Beta First",
-            "emailAddress" => "beta1@test.com"
-        ]);
-        $I->expect("the first profile is created successfully");
-        $I->seeResponseCodeIs(Response::HTTP_CREATED);
-
-        $I->amGoingTo("create the second profile");
+        $I->haveProfile(['username' => 'beta']);
+        $I->amGoingTo("create another profile with the same username");
         $I->sendPOST('/profiles', [
             "username" => "beta",
             "password" => "2222",

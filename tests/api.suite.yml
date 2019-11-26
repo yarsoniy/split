@@ -12,3 +12,4 @@ modules:
             depends: Symfony
             cleanup: true # All doctrine queries will be wrapped in a transaction, which will be rolled back at the end of each test
         - \Company\Split\Tests\Helper\Api
+        - \Company\Split\Tests\Helper\ProfilePopulator
