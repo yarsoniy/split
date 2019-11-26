@@ -1,11 +1,10 @@
 <?php
 
-namespace Company\Split\Infrastructure\Repository\Person;
+namespace Company\Split\Infrastructure\Repository;
 
 use Company\Split\Domain\Person\Person;
 use Company\Split\Domain\Person\PersonId;
 use Company\Split\Domain\Person\PersonRepository;
-use Company\Split\Infrastructure\Repository\DoctrineRepository;
 
 /**
  * @method PersonId getNewId()
@@ -13,7 +12,7 @@ use Company\Split\Infrastructure\Repository\DoctrineRepository;
  * @method Person|null get(PersonId $id)
  * @method Person[] getAll()
  */
-class PersonDoctrineRepository extends DoctrineRepository implements PersonRepository
+class DoctrinePersonRepository extends DoctrineRepository implements PersonRepository
 {
     protected const ENTITY_CLASS = Person::class;
     protected const ID_CLASS = PersonId::class;
