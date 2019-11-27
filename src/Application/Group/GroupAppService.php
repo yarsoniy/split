@@ -7,7 +7,7 @@ use Company\Split\Domain\Group\Group;
 use Company\Split\Domain\Group\GroupId;
 use Company\Split\Domain\Group\GroupRepository;
 
-class GroupService
+class GroupAppService
 {
     /** @var PersistenceProvider  */
     private $persistence;

@@ -5,15 +5,20 @@ namespace Company\Split\Tests\Helper;
 // all public methods declared in helper class will be available in $I
 
 use Codeception\Module\Doctrine2;
+use Codeception\Module\REST;
 use Codeception\Module\Symfony;
 use Company\Split\Domain\Person\Person;
 use Company\Split\Domain\Person\PersonId;
 use Company\Split\Infrastructure\Security\User;
+use Company\Split\Infrastructure\Security\UserRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class ProfilePopulator extends \Codeception\Module
+class ProfileHelper extends \Codeception\Module
 {
     private $faker;
 
@@ -51,7 +56,6 @@ class ProfilePopulator extends \Codeception\Module
      * Generates and saves a Person entity
      * @param array $fields
      * @return string
-     * @throws \Codeception\Exception\ModuleException
      */
     public function havePerson($fields = [])
     {
@@ -67,7 +71,6 @@ class ProfilePopulator extends \Codeception\Module
     /**
      * @param array $fields
      * @return string
-     * @throws \Codeception\Exception\ModuleException
      */
     public function haveProfile($fields = [])
     {
@@ -93,5 +96,23 @@ class ProfilePopulator extends \Codeception\Module
         $user->setPassword($encoded);
 
         return $this->save($user);
+    }
+
+    public function amAuthenticatedAs($username)
+    {
+        /** @var REST $module */
+        $module = $this->getModule('REST');
+
+        /** @var ContainerInterface $symfonyContainer */
+        $symfonyContainer = $this->getModule('Symfony')->_getContainer();
+
+        $user = $symfonyContainer->get(UserRepository::class)->findOneBy(['username' => $username]);
+        if (!$user) {
+            throw new \Exception("User with username '$username' not found");
+        }
+
+        $tokenManager = $symfonyContainer->get(JWTTokenManagerInterface::class);
+        $token = $tokenManager->create($user);
+        $module->haveHttpHeader('Authorization', 'Bearer ' . $token);
     }
 }

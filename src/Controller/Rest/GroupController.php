@@ -2,7 +2,7 @@
 
 namespace Company\Split\Controller\Rest;
 
-use Company\Split\Application\Group\GroupService;
+use Company\Split\Application\Group\GroupAppService;
 use Company\Split\Controller\Rest\Resource\GroupResource;
 use Company\Split\Controller\Rest\Resource\GroupResourceMaker;
 use Company\Split\Domain\Group\Group;
@@ -13,19 +13,22 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @package Company\Split\Controller\Rest
  * @SWG\Tag(name="group")
  */
-class GroupController extends AbstractFOSRestController
+class GroupController extends BaseRestController
 {
-    /** @var GroupService  */
+    /** @var GroupAppService  */
     private $groupService;
 
     public function __construct(
-        GroupService $groupService
+        ValidatorInterface $validator,
+        GroupAppService $groupService
     ){
+        parent::__construct($validator);
         $this->groupService = $groupService;
     }
 
@@ -60,6 +63,9 @@ class GroupController extends AbstractFOSRestController
      */
     public function postAction(GroupResource $input)
     {
+        if ($validationResult = $this->validateInput($input)) {
+            return $validationResult;
+        }
 
         $group = $this->groupService->create($input->name);
         $result = $this->prepareResource($group);

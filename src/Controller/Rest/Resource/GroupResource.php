@@ -5,6 +5,7 @@ namespace Company\Split\Controller\Rest\Resource;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Type;
 use Swagger\Annotations as SWG;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class GroupResource
 {
@@ -18,6 +19,7 @@ class GroupResource
     /**
      * @var string
      * @Type("string")
+     * @Assert\NotBlank
      */
     public $name;
 
