@@ -9,7 +9,7 @@ use Psr\Container\ContainerInterface;
  * Using this facade you can access the inner service globally
  * @package Company\Split\Domain\Core
  */
-class EventDispatcherFacade
+class EventBusFacade
 {
     /** @var ContainerInterface */
     private static $container;
@@ -19,11 +19,11 @@ class EventDispatcherFacade
         static::$container = $container;
     }
 
-    private static function getInstance(): EventDispatcher
+    private static function getInstance(): EventBus
     {
         //we can't use dependency injection in a static context
         //that's why we have to interact with the container directly
-        return static::$container->get(EventDispatcher::class);
+        return static::$container->get(EventBus::class);
     }
 
     public static function add(DomainEvent $event)

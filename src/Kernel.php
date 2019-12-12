@@ -2,7 +2,7 @@
 
 namespace Company\Split;
 
-use Company\Split\Domain\Core\EventDispatcherFacade;
+use Company\Split\Domain\Core\EventBusFacade;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -56,6 +56,6 @@ class Kernel extends BaseKernel
 
     protected function initServiceFacades()
     {
-        EventDispatcherFacade::setContainer($this->getContainer());
+        EventBusFacade::setContainer($this->getContainer());
     }
 }
