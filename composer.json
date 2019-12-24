@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.15",
+        "php": "7.2.*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "friendsofsymfony/rest-bundle": "^2.5",
@@ -43,6 +43,11 @@
         "symfony/web-server-bundle": "^4.2"
     },
     "config": {
+        "platform": {
+            "php": "7.2.20",
+            "ext-amqp": "1.9.4",
+            "ext-zip": "1.15.5"
+        },
         "preferred-install": {
             "*": "dist"
         },
