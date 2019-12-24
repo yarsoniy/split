@@ -7,8 +7,10 @@ use Company\Split\Application\Auth\UsernameIsNotUnique;
 use Company\Split\Application\Person\PersonAppService;
 use Company\Split\Controller\Rest\Resource\ProfileMaker;
 use Company\Split\Controller\Rest\Resource\ProfileResource;
+use Company\Split\Domain\Core\EventDispatcherFacade;
 use Company\Split\Domain\Person\EmailOccupiedException;
 use Company\Split\Domain\Person\Person;
+use Company\Split\Domain\Person\PersonCreatedEvent;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -154,6 +156,10 @@ class ProfileController extends BaseRestController
         foreach ($this->personService->findAll() as $person) {
             $result[] = $this->prepareResource($person);
         }
+
+        $event = new PersonCreatedEvent($person->getId());
+        EventDispatcherFacade::add($event);
+        EventDispatcherFacade::dispatch();
 
         return $this->success($result);
     }

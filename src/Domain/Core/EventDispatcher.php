@@ -2,7 +2,7 @@
 
 namespace Company\Split\Domain\Core;
 
-interface EventBus
+interface EventDispatcher
 {
     public function add(DomainEvent $event): void;
 

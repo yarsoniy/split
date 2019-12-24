@@ -19,9 +19,6 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    Company\Split\Domain\Core\EventPublisher:
-        public: true
-
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Company\Split\Controller\Web\:
@@ -32,6 +29,11 @@ services:
         resource: '../src/Controller/Rest'
         exclude: '../src/Controller/Rest/Resource'
         tags: ['controller.service_arguments']
+
+    Company\Split\Infrastructure\EventDispatcher\MessengerEventDispatcher: ~
+    Company\Split\Domain\Core\EventDispatcher:
+        alias: Company\Split\Infrastructure\EventDispatcher\MessengerEventDispatcher
+        public: true
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -6,4 +6,4 @@ framework:
 
         routing:
             # Route your messages to the transports
-            # 'App\Message\YourMessage': amqp
+             'Company\Split\Domain\Core\DomainEvent': async
