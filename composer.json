@@ -12,26 +12,26 @@
         "ramsey/uuid": "^3.8",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/amqp-pack": "^1.0",
-        "symfony/asset": "4.2.*",
-        "symfony/console": "4.2.*",
-        "symfony/dotenv": "4.2.*",
-        "symfony/expression-language": "4.2.*",
+        "symfony/asset": "^4.2",
+        "symfony/console": "^4.2",
+        "symfony/dotenv": "^4.2",
+        "symfony/expression-language": "^4.2",
         "symfony/flex": "^1.1",
-        "symfony/form": "4.2.*",
-        "symfony/framework-bundle": "4.2.*",
-        "symfony/messenger": "4.2.*",
+        "symfony/form": "^4.2",
+        "symfony/framework-bundle": "^4.2",
+        "symfony/messenger": "^4.2",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "*",
-        "symfony/process": "4.2.*",
-        "symfony/security-bundle": "4.2.*",
+        "symfony/process": "^4.2",
+        "symfony/security-bundle": "^4.2",
         "symfony/serializer-pack": "*",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/translation": "4.2.*",
-        "symfony/twig-bundle": "4.2.*",
-        "symfony/validator": "4.2.*",
-        "symfony/web-link": "4.2.*",
+        "symfony/translation": "^4.2",
+        "symfony/twig-bundle": "^4.2",
+        "symfony/validator": "^4.2",
+        "symfony/web-link": "^4.2",
         "symfony/webpack-encore-bundle": "^1.2",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "^4.2"
     },
     "require-dev": {
         "codeception/codeception": "^3.1",
@@ -40,7 +40,7 @@
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
-        "symfony/web-server-bundle": "4.2.*"
+        "symfony/web-server-bundle": "^4.2"
     },
     "config": {
         "preferred-install": {
@@ -80,7 +80,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.2.*"
+            "require": "4.4.*"
         }
     }
 }
