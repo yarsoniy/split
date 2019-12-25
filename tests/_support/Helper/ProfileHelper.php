@@ -11,7 +11,6 @@ use Company\Split\Domain\Person\Person;
 use Company\Split\Domain\Person\PersonId;
 use Company\Split\Infrastructure\Security\User;
 use Company\Split\Infrastructure\Security\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;

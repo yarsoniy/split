@@ -34,7 +34,7 @@ class LoginCest
         $I->dontSeeResponseContains('"token"');
         $I->seeResponseContainsJson([
             "code" => 401,
-            "message" => "Bad credentials.",
+            "message" => "Invalid credentials.",
         ]);
     }
 }
