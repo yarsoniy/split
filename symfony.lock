@@ -29,6 +29,27 @@
             "tests/unit.suite.yml"
         ]
     },
+    "codeception/lib-asserts": {
+        "version": "1.10.1"
+    },
+    "codeception/lib-innerbrowser": {
+        "version": "1.2.3"
+    },
+    "codeception/module-asserts": {
+        "version": "1.1.1"
+    },
+    "codeception/module-doctrine2": {
+        "version": "1.0.1"
+    },
+    "codeception/module-phpbrowser": {
+        "version": "1.0.0"
+    },
+    "codeception/module-rest": {
+        "version": "1.0.0"
+    },
+    "codeception/module-symfony": {
+        "version": "1.0.0"
+    },
     "codeception/phpunit-wrapper": {
         "version": "8.0.4"
     },
@@ -129,9 +150,6 @@
     "exsyst/swagger": {
         "version": "v0.4.1"
     },
-    "facebook/webdriver": {
-        "version": "1.7.1"
-    },
     "flow/jsonpath": {
         "version": "0.4.0"
     },
@@ -151,7 +169,7 @@
         "version": "v1.9.0"
     },
     "guzzlehttp/guzzle": {
-        "version": "6.4.1"
+        "version": "6.5.2"
     },
     "guzzlehttp/promises": {
         "version": "v1.3.1"
@@ -164,9 +182,6 @@
     },
     "hoa/consistency": {
         "version": "1.17.05.02"
-    },
-    "hoa/console": {
-        "version": "3.17.05.02"
     },
     "hoa/event": {
         "version": "1.17.01.13"
@@ -400,7 +415,7 @@
         "version": "v4.2.3"
     },
     "symfony/browser-kit": {
-        "version": "v4.2.12"
+        "version": "v4.4.2"
     },
     "symfony/cache": {
         "version": "v4.2.3"
@@ -452,7 +467,7 @@
         "version": "v4.2.3"
     },
     "symfony/dom-crawler": {
-        "version": "v4.2.12"
+        "version": "v4.4.2"
     },
     "symfony/dotenv": {
         "version": "v4.2.3"
@@ -718,15 +733,6 @@
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
         ]
-    },
-    "symfony/web-server-bundle": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
-        }
     },
     "symfony/webpack-encore-bundle": {
         "version": "1.0",

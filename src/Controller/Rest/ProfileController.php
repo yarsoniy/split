@@ -161,6 +161,8 @@ class ProfileController extends BaseRestController
         EventDispatcherFacade::add($event);
         EventDispatcherFacade::dispatch();
 
+        throw new \Exception("OLOLO");
+
         return $this->success($result);
     }
 
