@@ -5,14 +5,10 @@ namespace Company\Split\Controller\Rest;
 use Company\Split\Application\Auth\AuthProvider;
 use Company\Split\Application\Auth\UsernameIsNotUnique;
 use Company\Split\Application\Person\PersonAppService;
-use Company\Split\Controller\Rest\Resource\ProfileMaker;
 use Company\Split\Controller\Rest\Resource\ProfileResource;
-use Company\Split\Domain\Core\EventDispatcherFacade;
 use Company\Split\Domain\Person\EmailOccupiedException;
 use Company\Split\Domain\Person\Person;
-use Company\Split\Domain\Person\PersonCreatedEvent;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
@@ -161,10 +157,14 @@ class ProfileController extends BaseRestController
 
     private function prepareResource(Person $person): ProfileResource
     {
-        $maker = new ProfileMaker();
-        $profile = $maker->makeFromPerson($person);
-        $profile->username = $this->auth->getUsername($person->getId());
+        $resource = new ProfileResource();
+        $personDTO = $person->toDTO();
 
-        return $profile;
+        $resource->id = (string)$personDTO->id;
+        $resource->fullName = $personDTO->name;
+        $resource->emailAddress = $personDTO->email;
+        $resource->username = $this->auth->getUsername($person->getId());
+
+        return $resource;
     }
 }

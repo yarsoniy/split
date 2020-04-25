@@ -3,9 +3,6 @@
 namespace Company\Split\Domain\Person;
 
 use Company\Split\Domain\Core\AggregateRoot;
-use Company\Split\Domain\Core\IdGenerator;
-use Company\Split\Domain\Group\Group;
-use Company\Split\Domain\Group\GroupId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -71,10 +68,14 @@ class Person implements AggregateRoot
         $this->email = $email;
     }
 
-    public function dumpData(PersonDataPicker $picker)
+    public function toDTO(): PersonDTO
     {
-        $picker->setId($this->id);
-        $picker->setName($this->name);
-        $picker->setEmail($this->email);
+        $dto = new PersonDTO();
+        $dto->id = $this->id;
+        $dto->name = $this->name;
+        $dto->email = $this->email;
+        $dto->email = $this->email;
+
+        return $dto;
     }
 }

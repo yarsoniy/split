@@ -4,9 +4,7 @@ namespace Company\Split\Controller\Rest;
 
 use Company\Split\Application\Group\GroupAppService;
 use Company\Split\Controller\Rest\Resource\GroupResource;
-use Company\Split\Controller\Rest\Resource\GroupResourceMaker;
 use Company\Split\Domain\Group\Group;
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -135,10 +133,15 @@ class GroupController extends BaseRestController
         return $this->view($result, Response::HTTP_OK);
     }
 
-    private function prepareResource(Group $object): GroupResource
+    private function prepareResource(Group $group): GroupResource
     {
-        $maker = new GroupResourceMaker();
-        $resource = $maker->makeFromGroup($object);
+        $resource = new GroupResource();
+        $groupDTO = $group->toDTO();
+
+        $resource->id = (string)$groupDTO->id;
+        $resource->name = $groupDTO->name;
+        $resource->whenCreated = $groupDTO->whenCreated;
+
         return $resource;
     }
 }

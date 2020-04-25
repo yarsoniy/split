@@ -3,6 +3,7 @@
 namespace Company\Split\Domain\Group;
 
 use Company\Split\Domain\Core\AggregateRoot;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +29,7 @@ class Group implements AggregateRoot
     private $name;
 
     /**
-     * @var \DateTimeImmutable
+     * @var DateTimeImmutable
      * @ORM\Column(type="datetime_immutable")
      */
     private $whenCreated;
@@ -43,14 +44,17 @@ class Group implements AggregateRoot
         $this->id = $id;
         $this->name = $name;
         try {
-            $this->whenCreated = new \DateTimeImmutable('now');
+            $this->whenCreated = new DateTimeImmutable('now');
         } catch (\Exception $e) {}
     }
 
-    public function dumpData(GroupDataPicker $picker)
+    public function toDTO(): GroupDTO
     {
-        $picker->setId($this->id);
-        $picker->setName($this->name);
-        $picker->setWhenCreated($this->whenCreated);
+        $dto = new GroupDTO();
+        $dto->id = $this->id;
+        $dto->name = $this->name;
+        $dto->whenCreated = $this->whenCreated;
+
+        return $dto;
     }
 }
