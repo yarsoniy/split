@@ -156,13 +156,6 @@ class ProfileController extends BaseRestController
         foreach ($this->personService->findAll() as $person) {
             $result[] = $this->prepareResource($person);
         }
-
-        $event = new PersonCreatedEvent($person->getId());
-        EventDispatcherFacade::add($event);
-        EventDispatcherFacade::dispatch();
-
-        throw new \Exception("OLOLO");
-
         return $this->success($result);
     }
 
