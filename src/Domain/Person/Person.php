@@ -33,36 +33,22 @@ class Person implements AggregateRoot
      */
     private $email;
 
-    /**
-     * Person constructor.
-     * @param PersonId $id
-     * @param string $name
-     */
     public function __construct(PersonId $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;
     }
 
-    /**
-     * @return PersonId
-     */
     public function getId(): PersonId
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email)
     {
         $this->email = $email;

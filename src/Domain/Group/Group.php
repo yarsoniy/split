@@ -34,18 +34,11 @@ class Group implements AggregateRoot
      */
     private $whenCreated;
 
-    /**
-     * Group constructor.
-     * @param GroupId $id
-     * @param string $name
-     */
     public function __construct(GroupId $id, string $name)
     {
         $this->id = $id;
         $this->name = $name;
-        try {
-            $this->whenCreated = new DateTimeImmutable('now');
-        } catch (\Exception $e) {}
+        $this->whenCreated = new DateTimeImmutable('now');
     }
 
     public function toDTO(): GroupDTO

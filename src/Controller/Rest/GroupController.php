@@ -6,7 +6,6 @@ use Company\Split\Application\Group\GroupAppService;
 use Company\Split\Controller\Rest\Resource\GroupResource;
 use Company\Split\Domain\Group\Group;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\View\View;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Swagger\Annotations as SWG;
@@ -68,8 +67,7 @@ class GroupController extends BaseRestController
         $group = $this->groupService->create($input->name);
         $result = $this->prepareResource($group);
 
-        $view = $this->view($result, Response::HTTP_CREATED);
-        return $this->handleView($view);
+        return $this->successCreated($result);
     }
 
     /**
@@ -90,17 +88,17 @@ class GroupController extends BaseRestController
      * )
      *
      * @param $id
-     * @return View
+     * @return Response
      */
     public function getAction($id)
     {
         $group = $this->groupService->find($id);
         if (!$group) {
-            return $this->view("Resource not found", Response::HTTP_NOT_FOUND);
+            return $this->errorNotFound();
         }
 
         $result = $this->prepareResource($group);
-        return $this->view($result, Response::HTTP_OK);
+        return $this->success($result);
     }
 
     /**
@@ -121,7 +119,7 @@ class GroupController extends BaseRestController
      *     )
      * )
      *
-     * @return View
+     * @return Response
      */
     public function getListAction()
     {
@@ -130,7 +128,7 @@ class GroupController extends BaseRestController
             $result[] = $this->prepareResource($item);
         }
 
-        return $this->view($result, Response::HTTP_OK);
+        return $this->success($result);
     }
 
     private function prepareResource(Group $group): GroupResource

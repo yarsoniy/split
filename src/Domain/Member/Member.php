@@ -57,10 +57,7 @@ class Member implements AggregateRoot
         $this->id = $id;
         $this->groupId = $groupId;
         $this->name = $name;
-
-        try {
-            $this->whenCreated = new \DateTimeImmutable('now');
-        } catch (\Exception $e) {}
+        $this->whenCreated = new \DateTimeImmutable('now');
     }
 
     /**

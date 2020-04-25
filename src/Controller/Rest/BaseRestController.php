@@ -18,34 +18,19 @@ abstract class BaseRestController extends AbstractFOSRestController
         $this->validator = $validator;
     }
 
-    /**
-     * @param mixed|null $data
-     * @return Response
-     */
-    protected function success($data = null)
+    protected function success($data = null): Response
     {
         $view = $this->view($data, Response::HTTP_OK);
         return $this->handleView($view);
     }
 
-    /**
-     * @param mixed|null $data
-     * @return Response
-     */
-    protected function successCreated($data = null)
+    protected function successCreated($data = null): Response
     {
         $view = $this->view($data, Response::HTTP_CREATED);
         return $this->handleView($view);
     }
 
-    /**
-     * @param int $httpCode
-     * @param string $errorKey
-     * @param string $message
-     * @param string $propertyPath
-     * @return Response
-     */
-    protected function error(int $httpCode, string $errorKey, string $message, string $propertyPath = '')
+    protected function error(int $httpCode, string $errorKey, string $message, string $propertyPath = ''): Response
     {
         $error = [];
         $error['code'] = $httpCode;
@@ -58,16 +43,12 @@ abstract class BaseRestController extends AbstractFOSRestController
         return $this->handleView($view);
     }
 
-    protected function errorNotFound()
+    protected function errorNotFound(): Response
     {
         return $this->error(Response::HTTP_NOT_FOUND, 'not_found', 'Not found');
     }
 
-    /**
-     * @param $inputData
-     * @return Response|null
-     */
-    protected function validateInput($inputData)
+    protected function validateInput($inputData): ?Response
     {
         $validationErrors = $this->validator->validate($inputData);
         if (!$validationErrors->count()) {
